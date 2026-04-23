@@ -7,7 +7,7 @@ RSpec.describe 'Employees', type: :request do
     it 'returns all employees' do
       get '/api/v1/employees'
       expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body)['employees'].count).to eq(3)
+      expect(JSON.parse(response.body)['data'].count).to eq(3)
     end
   end
 
@@ -65,6 +65,25 @@ RSpec.describe 'Employees', type: :request do
       delete "/api/v1/employees/#{employee.id}"
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body)['message']).to eq('Employee deleted successfully')
+    end
+  end
+
+  # get employess with pagination
+  describe 'GET /api/v1/employees with pagination' do
+    before { create_list(:employee, 25) }
+
+    it 'returns paginated results' do
+      get '/api/v1/employees', params: { page: 1, per_page: 20 }
+
+      expect(response).to have_http_status(:ok)
+      body = JSON.parse(response.body)
+
+      puts body
+      expect(body['data'].size).to eq(20)
+      expect(body['meta']['total_count']).to eq(25)
+      expect(body['meta']['current_page']).to eq(1)
+      expect(body['meta']['total_pages']).to eq(2)
+      expect(body['meta']['per_page']).to eq(20)
     end
   end
 end
