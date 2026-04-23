@@ -1,0 +1,40 @@
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+
+# development:
+#   <<: *default
+#   database: salary_management_development
+
+# test:
+#   <<: *default
+#   database: salary_management_test
+
+# production:
+#   <<: *default
+#   database: salary_management_production
+#   username: salary_management
+#   password: <%= ENV["SALARY_MANAGEMENT_DATABASE_PASSWORD"] %>
+
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+
+development:
+  <<: *default
+  database: salary_management_development
+
+test:
+  <<: *default
+  database: salary_management_test
+
+production:
+  <<: *default
+  database: salary_management_production
