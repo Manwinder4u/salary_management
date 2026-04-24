@@ -39,15 +39,15 @@ country, department, job_title, email — all indexed for fast insight queries.
 ## API Endpoints
 
 ### Employees
-GET    /api/v1/employees          paginated list
-GET    /api/v1/employees/:id      single employee
-POST   /api/v1/employees          create
-PATCH  /api/v1/employees/:id      update
-DELETE /api/v1/employees/:id      delete
+- GET    /api/v1/employees          paginated list
+- GET    /api/v1/employees/:id      single employee
+- POST   /api/v1/employees          create
+- PATCH  /api/v1/employees/:id      update
+- DELETE /api/v1/employees/:id      delete
 
 ### Insights
-GET /api/v1/insights/salary_by_country    min, max, avg, count by country
-GET /api/v1/insights/salary_by_job_title  avg, count by job title in country
+- GET /api/v1/insights/salary_by_country    min, max, avg, count by country
+- GET /api/v1/insights/salary_by_job_title  avg, count by job title in country
 
 ### Key Points
 - As per the given scope we only build this app with one table.
