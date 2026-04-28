@@ -46,7 +46,7 @@ TOTAL.times do # loop 10K times
   records << {
     first_name: first_name,
     last_name:  last_name,
-    email:      "#{first_name.downcase}.#{last_name.downcase}#{rand(99_999)}@company.com",
+    email:      "#{first_name.downcase}.#{last_name.downcase}.#{SecureRandom.hex(6)}@company.com",
     department: DEPARTMENTS.sample,
     job_title:  JOB_TITLES.sample,
     country:    COUNTRIES.sample,
@@ -56,10 +56,7 @@ TOTAL.times do # loop 10K times
     updated_at: Time.now
   }
 
-  # if array size is 1000 insert recods 
-  # this will happen 10 times
-  # here, we are hitting Db only 10 times
-  if records.size == BATCH_SIZE 
+  if records.size == BATCH_SIZE
     Employee.insert_all(records)
     puts "Inserted #{Employee.count} employees..."
     records = [] # empty the array again
