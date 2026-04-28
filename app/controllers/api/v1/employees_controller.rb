@@ -1,8 +1,7 @@
 module Api
   module V1
     class EmployeesController < ApplicationController
-
-      before_action :set_employee, only: [:show, :update, :destroy]
+      before_action :set_employee, only: [ :show, :update, :destroy ]
 
       def index
         page = params[:page] || 1
@@ -43,7 +42,7 @@ module Api
 
       def destroy
         if @employee.destroy
-          render json: { message: 'Employee deleted successfully' }, status: :ok
+          render json: { message: "Employee deleted successfully" }, status: :ok
         else
           render json: { errors: @employee.errors.full_messages }, status: :unprocessable_entity
         end
@@ -54,7 +53,7 @@ module Api
       def set_employee
         @employee = Employee.find(params[:id])
       rescue ActiveRecord::RecordNotFound
-        render json: { error: 'Employee not found' }, status: :not_found
+        render json: { error: "Employee not found" }, status: :not_found
       end
 
       def employee_params

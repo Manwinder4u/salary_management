@@ -1,9 +1,8 @@
 module Api
   module V1
     class InsightsController < ApplicationController
-
       def salary_by_country
-        return missing_param('country') unless params[:country].present?
+        return missing_param("country") unless params[:country].present?
 
         result = Insights::SalaryStatsService.new(
           country: params[:country]
@@ -13,7 +12,7 @@ module Api
       end
 
       def salary_by_job_title
-        return missing_param('country and job_title') unless params[:country].present? && params[:job_title].present?
+        return missing_param("country and job_title") unless params[:country].present? && params[:job_title].present?
 
         result = Insights::SalaryStatsService.new(
           country:   params[:country],

@@ -9,8 +9,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :employees
 
-      get 'insights/salary_by_country', to: 'insights#salary_by_country'
-      get 'insights/salary_by_job_title', to: 'insights#salary_by_job_title'
+      get "insights/salary_by_country", to: "insights#salary_by_country"
+      get "insights/salary_by_job_title", to: "insights#salary_by_job_title"
     end
   end
 end

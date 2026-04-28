@@ -1,6 +1,5 @@
 module Insights
   class SalaryStatsService
-
     def initialize(country:, job_title: nil, department: nil)
       @country = country
       @job_title = job_title
@@ -14,7 +13,7 @@ module Insights
     def salary_by_job_title
       compute_stats(base_query.by_job_title(@job_title))
     end
-    
+
     private
 
     def base_query
