@@ -25,9 +25,9 @@ module Api
       end
 
       def create
-        @employee = Employee.create(employee_params)
+        @employee = Employee.new(employee_params)
         if @employee.save
-          render json: { employee: @employee }, status: :created
+          render json: @employee, status: :created
         else
           render json: { errors: @employee.errors.full_messages }, status: :unprocessable_entity
         end

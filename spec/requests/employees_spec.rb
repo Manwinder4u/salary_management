@@ -32,7 +32,7 @@ RSpec.describe 'Employees', type: :request do
     it 'creates a new employee' do
       post '/api/v1/employees', params: { employee: employee_params }
       expect(response).to have_http_status(:created)
-      expect(JSON.parse(response.body)['employee']['id']).to be_present
+      expect(JSON.parse(response.body)['id']).to be_present
     end
 
     it 'returns 422 if invalid' do
