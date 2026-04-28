@@ -10,6 +10,11 @@
 
 require 'faker'
 
+if Employee.count >= 10_000 && ENV['FORCE_RESEED'] != '1'
+  puts "Already seeded #{Employee.count} employees. Use FORCE_RESEED=1 to reseed."
+  exit
+end
+
 puts "Cleaning existing employees..."
 Employee.delete_all
 
