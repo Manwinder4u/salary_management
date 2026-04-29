@@ -1,24 +1,3 @@
-# default: &default
-#   adapter: postgresql
-#   encoding: unicode
-#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
-
-# development:
-#   <<: *default
-#   database: salary_management_development
-
-# test:
-#   <<: *default
-#   database: salary_management_test
-
-# production:
-#   <<: *default
-#   database: salary_management_production
-#   username: salary_management
-#   password: <%= ENV["SALARY_MANAGEMENT_DATABASE_PASSWORD"] %>
-
-
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -36,5 +15,10 @@ test:
   database: salary_management_test
 
 production:
+<<<<<<< HEAD
   url: <%= ENV['DATABASE_URL'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+=======
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+>>>>>>> 428b4dc (chore: add Render deployment configuration)
