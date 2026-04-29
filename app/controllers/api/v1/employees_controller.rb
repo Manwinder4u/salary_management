@@ -6,7 +6,9 @@ module Api
       def index
         page = params[:page] || 1
         per_page = params[:per_page] || 20
-        employees = Employee.order(created_at: :desc).page(page).per(per_page)
+        employees = Employee.order(created_at: :desc)
+        employees = employees.search_by_name(params[:search]) if params[:search].present?
+        employees = employees.page(page).per(per_page)
 
         render json: {
           data: employees,

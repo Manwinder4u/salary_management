@@ -26,5 +26,14 @@ RSpec.describe Insights::SalaryStatsService do
       expect(result[:average]).to eq(60_000)
       expect(result[:count]).to eq(2)
     end
+
+    it "returns min, max, average and count for a job title in a country" do
+      result = described_class.new(country: "India", job_title: "Engineer").salary_by_job_title
+
+      expect(result[:average]).to eq(60_000)
+      expect(result[:count]).to eq(2)
+      expect(result[:min]).to eq(50_000)
+      expect(result[:max]).to eq(70_000)
+    end
   end
 end

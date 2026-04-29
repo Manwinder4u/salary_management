@@ -11,4 +11,7 @@ class Employee < ApplicationRecord
 
   scope :in_country, ->(country) { where(country: country) }
   scope :by_job_title, ->(job_title) { where(job_title: job_title) }
+  scope :search_by_name, ->(query) {
+    where("first_name ILIKE :q OR last_name ILIKE :q", q: "%#{query}%")
+  }
 end

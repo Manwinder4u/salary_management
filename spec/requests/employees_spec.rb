@@ -86,4 +86,25 @@ RSpec.describe 'Employees', type: :request do
       expect(body['meta']['per_page']).to eq(20)
     end
   end
+
+  describe "GET /api/v1/employees with search" do
+    before do
+      create(:employee, first_name: "John", last_name: "Smith")
+      create(:employee, first_name: "Jane", last_name: "Doe")
+    end
+  
+    it "returns matching employees by name" do
+      get "/api/v1/employees", params: { search: "John" }
+      expect(response).to have_http_status(:ok)
+      body = JSON.parse(response.body)
+      expect(body["data"].size).to eq(1)
+      expect(body["data"].first["first_name"]).to eq("John")
+    end
+  
+    it "returns all employees when no search param" do
+      get "/api/v1/employees"
+      body = JSON.parse(response.body)
+      expect(body["data"].size).to eq(2)
+    end
+  end
 end
