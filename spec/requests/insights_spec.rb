@@ -43,4 +43,36 @@ RSpec.describe 'Insights API', type: :request do
       expect(response).to have_http_status(:bad_request)
     end
   end
+
+  describe "GET /api/v1/insights/salary_by_department" do
+    it "returns salary stats grouped by department for a country" do
+      get "/api/v1/insights/salary_by_department", params: { country: "India" }
+  
+      expect(response).to have_http_status(:ok)
+      body = JSON.parse(response.body)
+  
+      engineering = body.find { |r| r["department"] == "Engineering" }
+      expect(engineering["average"]).to eq(150000)
+      expect(engineering["min"]).to eq(100000)
+      expect(engineering["max"]).to eq(200000)
+      expect(engineering["count"]).to eq(2)
+    end
+  
+    it "returns 400 if country param missing" do
+      get "/api/v1/insights/salary_by_department"
+      expect(response).to have_http_status(:bad_request)
+    end
+  end
+  
+  describe "GET /api/v1/insights/headcount_by_country" do
+    it "returns employee count grouped by country" do
+      get "/api/v1/insights/headcount_by_country"
+  
+      expect(response).to have_http_status(:ok)
+      body = JSON.parse(response.body)
+  
+      india = body.find { |r| r["country"] == "India" }
+      expect(india["count"]).to eq(2)
+    end
+  end
 end

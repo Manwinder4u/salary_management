@@ -14,4 +14,5 @@ class Employee < ApplicationRecord
   scope :search_by_name, ->(query) {
     where("first_name ILIKE :q OR last_name ILIKE :q", q: "%#{query}%")
   }
+  scope :by_department, ->(dept) { where(department: dept) }
 end

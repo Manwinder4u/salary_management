@@ -22,6 +22,21 @@ module Api
         render json: result.merge(country: params[:country], job_title: params[:job_title])
       end
 
+      def salary_by_department
+        return missing_param("country") unless params[:country].present?
+      
+        result = Insights::SalaryStatsService.new(
+          country: params[:country]
+        ).salary_by_department
+      
+        render json: result
+      end
+      
+      def headcount_by_country
+        result = Insights::SalaryStatsService.headcount_by_country
+        render json: result
+      end
+
       private
 
       def missing_param(param)

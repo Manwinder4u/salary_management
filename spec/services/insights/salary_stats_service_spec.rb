@@ -36,4 +36,27 @@ RSpec.describe Insights::SalaryStatsService do
       expect(result[:max]).to eq(70_000)
     end
   end
+
+  describe "#salary_by_department" do
+    it "returns salary stats grouped by department for a country" do
+      result = described_class.new(country: "India").salary_by_department
+
+      engineering = result.find { |r| r[:department] == "Engineering" }
+      expect(engineering[:average]).to eq(60_000)
+      expect(engineering[:min]).to eq(50_000)
+      expect(engineering[:max]).to eq(70_000)
+      expect(engineering[:count]).to eq(2)
+    end
+  end
+
+  describe "#headcount_by_country" do
+    it "returns employee count grouped by country" do
+      result = described_class.headcount_by_country
+
+      expect(result).to be_an(Array)
+
+      india = result.find { |r| r[:country] == "India" }
+      expect(india[:count]).to eq(3)
+    end
+  end
 end
