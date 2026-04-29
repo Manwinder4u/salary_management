@@ -15,10 +15,5 @@ test:
   database: salary_management_test
 
 production:
-<<<<<<< HEAD
-  url: <%= ENV['DATABASE_URL'] %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-=======
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
->>>>>>> 428b4dc (chore: add Render deployment configuration)
